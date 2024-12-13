@@ -4,6 +4,8 @@ Lab 2
 
 from collections import deque
 import time
+import random
+import itertools
 
 def read_incidence_matrix(filename: str) -> list[list]:
     """
@@ -305,14 +307,51 @@ def measure_execution_time(func, *args, **kwargs):
     result = func(*args, **kwargs)
     end_time = time.perf_counter()
     execution_time = end_time - start_time
-    print(f"Function '{func.__name__}' executed in {execution_time:.4f} seconds.")
-    return result
+    return execution_time
 
-def run_time_analyze():
-    """ Compare time execution """
+def generate_graph_dict(n: int) -> dict:
+    """ Gernerate graph as dict """
+    graph = {i: [] for i in range(n)}
+    for u, v in itertools.combinations(range(n), 2):
+        # Random decide to make edge or not
+        if random.choice([True, False]):
+            graph[u].append(v)
+            graph[v].append(u)
+    return graph
+
+def generate_graph_matrix(n: int) -> list:
+    """ Gernerate graph as adjacency matrix """
+    matrix = [[0] * n for _ in range(n)]
+    for u, v in itertools.combinations(range(n), 2):
+        # Random decide to make edge or not
+        if random.choice([True, False]):
+            matrix[u][v] = matrix[v][u] = 1
+    return matrix
+
+def test_iterative_adjacency_dict_dfs(graphs):
+    """ test_iterative_adjacency_dict_dfs """
+    for graph in graphs:
+        iterative_adjacency_dict_dfs(graph, 0)
+
+def run_time_analyze(v_count: int, loops_count: int):
+    """ Compare time execution"""
+    print("-"*30)
+    print(f"Vertice count: {v_count}")
+    print(f"Loops count: {loops_count}\n")
+    graphs_dict = [generate_graph_dict(v_count) for _ in range(loops_count)]
+    graphs_matrix = [generate_graph_matrix(v_count) for _ in range(loops_count)]
     
+    iterative_adjacency_dict_dfs_time = measure_execution_time(
+        test_iterative_adjacency_dict_dfs,
+        graphs_dict
+    )
+    print(f"{iterative_adjacency_dict_dfs_time = }")
+
 
 if __name__ == "__main__":
     import doctest
     doctest.testmod()
+    for i in range(10, 500, 10):
+        for j in range(10, 500, 10):
+            run_time_analyze(i, j)
     
