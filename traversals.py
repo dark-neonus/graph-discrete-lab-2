@@ -2,6 +2,9 @@
 Lab 2
 """
 
+from collections import deque
+import time
+
 def read_incidence_matrix(filename: str) -> list[list]:
     """
     :param str filename: path to file
@@ -212,31 +215,104 @@ def iterative_adjacency_dict_bfs(graph: dict[int, list[int]], start: int) -> lis
                     queue.append(neigbour)
     return traversing
 
+def bfs_matrix_distance_search(graph: list[list], start: int) -> int:
+    """ bfs_matrix_distance_search """
+    queue = deque([start])
+    visit_info = [False] * len(graph)
 
-# def adjacency_matrix_radius(graph: list[list]) -> int:
-#     """
-#     :param list[list] graph: the adjacency matrix of a given graph
-#     :returns int: the radius of the graph
-#     >>> adjacency_matrix_radius([[0, 1, 1], [1, 0, 1], [1, 1, 0]])
-#     1
-#     >>> adjacency_matrix_radius([[0, 1, 1], [1, 0, 1], [1, 1, 0], [0, 1, 0]])
-#     2
-#     """
-#     pass
+    visit_info[start] = True
+
+    distances = [float("inf")] * len(graph)
+    distances[start] = 0
+
+    while queue:
+        # Remove left element an return it
+        current_node = queue.popleft()
 
 
-# def adjacency_dict_radius(graph: dict[int: list[int]]) -> int:
-#     """
-#     :param dict graph: the adjacency list of a given graph
-#     :returns int: the radius of the graph
-#     >>> adjacency_dict_radius({0: [1, 2], 1: [0, 2], 2: [0, 1]})
-#     1
-#     >>> adjacency_dict_radius({0: [1, 2], 1: [0, 2], 2: [0, 1], 3: [1]})
-#     2
-#     """
-#     pass
+        for subnode, intersection_value in enumerate(graph[current_node]):
+            if intersection_value == 1:
+                if not visit_info[subnode]:
+                    if distances[subnode] == float("inf"):
+                        distances[subnode] = distances[current_node] + 1
+                    queue.append(subnode)
+                    visit_info[subnode] = True
 
+    return max(distances)
+
+def adjacency_matrix_radius(graph: list[list]) -> int:
+    """
+    :param list[list] graph: the adjacency matrix of a given graph
+    :returns int: the radius of the graph
+    >>> adjacency_matrix_radius([[0, 1, 1], [1, 0, 1], [1, 1, 0]])
+    1
+    """
+    radius = float("inf")
+    for node_start in range(len(graph)):
+        radius = min(radius, bfs_dict_distance_search(
+                                graph,node_start))
+
+    return 0 if radius == float("inf") else radius
+
+def bfs_dict_distance_search(graph: dict[int: list[int]], start: int) -> int:
+    """ bfs_dict_distance_search """
+    queue = deque([start])
+    visit_info = [False] * len(graph)
+
+    visit_info[start] = True
+
+    distances = [float("inf")] * len(graph)
+    distances[start] = 0
+
+    while queue:
+        # Remove left element an return it
+        current_node = queue.popleft()
+
+
+        for subnode in graph[current_node]:
+            if not visit_info[subnode]:
+                if distances[subnode] == float("inf"):
+                    distances[subnode] = distances[current_node] + 1
+                queue.append(subnode)
+                visit_info[subnode] = True
+
+    return max(distances)
+
+def adjacency_dict_radius(graph: dict[int: list[int]]) -> int:
+    """
+    :param dict graph: the adjacency list of a given graph
+    :returns int: the radius of the graph
+    >>> adjacency_dict_radius({0: [1, 2], 1: [0, 2], 2: [0, 1]})
+    1
+    """
+    radius = float("inf")
+    for node_start in graph:
+        radius = min(radius, bfs_dict_distance_search(
+                                graph,node_start))
+
+    return 0 if radius == float("inf") else radius
+
+def measure_execution_time(func, *args, **kwargs):
+    """
+    Measures the execution time of a given function.
+    
+    :param func: function to execute
+    :param args: function args
+    :param kwargs: function kwargs
+    :return: execution time.
+    """
+    start_time = time.perf_counter()
+    result = func(*args, **kwargs)
+    end_time = time.perf_counter()
+    execution_time = end_time - start_time
+    print(f"Function '{func.__name__}' executed in {execution_time:.4f} seconds.")
+    return result
+
+def run_time_analyze():
+    """ Compare time execution """
+    
 
 if __name__ == "__main__":
     import doctest
     doctest.testmod()
+    
