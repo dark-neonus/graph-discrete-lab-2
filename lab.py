@@ -61,8 +61,32 @@ def recursive_adjacency_dict_dfs(graph: dict[int, list[int]], start: int) -> lis
     [0, 1, 2]
     >>> recursive_adjacency_dict_dfs({0: [1, 2], 1: [0, 2, 3], 2: [0, 1], 3: []}, 0)
     [0, 1, 2, 3]
+    >>> recursive_adjacency_dict_dfs({0: [2, 1], 1: [0, 3, 2], 2: [0, 1], 3: []}, 0)
+    [0, 1, 2, 3]
+    >>> recursive_adjacency_dict_dfs({0: [], 1: [2], 2: [1, 3], 3: [2, 4], 4: []}, 1)
+    [1, 2, 3, 4]
+    >>> recursive_adjacency_dict_dfs({0: [1, 2], 1: [3, 2], 2: [1], 3: [1], 4: []}, 1)
+    [1, 2, 3]
+    >>> recursive_adjacency_dict_dfs({}, 0)
+    []
+    >>> recursive_adjacency_dict_dfs({0: [], 1: [], 2: []}, 0)
+    [0]
+    >>> recursive_adjacency_dict_dfs({0: [], 1: [0, 2], 2: [0]}, 0)
+    [0]
     """
-    pass
+    def recursion_logic(graph: dict[int, list[int]], current_node: int,
+                        path: list[int], visit_info: list[bool]) -> list[int]:
+        path.append(current_node)
+        visit_info[current_node] = True
+        for connected_node in sorted(graph[current_node]):
+            if not visit_info[connected_node]:
+                recursion_logic(graph, connected_node, path, visit_info)
+
+    path = []
+    if len(graph) > 0:
+        visit_info = [False] * len(graph)
+        recursion_logic(graph, start, path, visit_info)
+    return path
 
 
 def recursive_adjacency_matrix_dfs(graph: list[list[int]], start: int) ->list[int]:
@@ -134,4 +158,6 @@ def adjacency_dict_radius(graph: dict[int: list[int]]) -> int:
 
 if __name__ == "__main__":
     import doctest
-    doctest.testmod()
+    # doctest.testmod()
+    doctest.run_docstring_examples(recursive_adjacency_dict_dfs, globals())
+    recursive_adjacency_dict_dfs({}, 0)
