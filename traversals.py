@@ -304,7 +304,7 @@ def measure_execution_time(func, *args, **kwargs):
     :return: execution time.
     """
     start_time = time.perf_counter()
-    result = func(*args, **kwargs)
+    func(*args, **kwargs)
     end_time = time.perf_counter()
     execution_time = end_time - start_time
     return execution_time
@@ -328,30 +328,101 @@ def generate_graph_matrix(n: int) -> list:
             matrix[u][v] = matrix[v][u] = 1
     return matrix
 
-def test_iterative_adjacency_dict_dfs(graphs):
-    """ test_iterative_adjacency_dict_dfs """
-    for graph in graphs:
-        iterative_adjacency_dict_dfs(graph, 0)
+
+
+
 
 def run_time_analyze(v_count: int, loops_count: int):
-    """ Compare time execution"""
-    print("-"*30)
+    """ Compare time execution """
+    print("\n" * 3)
+    print("-" * 30)
     print(f"Vertice count: {v_count}")
     print(f"Loops count: {loops_count}\n")
+
+    # Generate graphs
     graphs_dict = [generate_graph_dict(v_count) for _ in range(loops_count)]
     graphs_matrix = [generate_graph_matrix(v_count) for _ in range(loops_count)]
-    
-    iterative_adjacency_dict_dfs_time = measure_execution_time(
+
+    # --------------------------------------------
+    # Time test for iterative_adjacency_dict_bfs
+    def test_iterative_adjacency_dict_bfs(graphs):
+        """ Test iterative_adjacency_dict_bfs """
+        for graph in graphs:
+            iterative_adjacency_dict_bfs(graph, 0)
+
+    iterative_adjacency_dict_bfs_time = round(measure_execution_time(
+        test_iterative_adjacency_dict_bfs,
+        graphs_dict
+    ), 5)
+    print(f"> {iterative_adjacency_dict_bfs_time = } s")
+
+    # --------------------------------------------
+    # Time test for iterative_adjacency_dict_dfs
+    def test_iterative_adjacency_dict_dfs(graphs):
+        """ Test iterative_adjacency_dict_dfs """
+        for graph in graphs:
+            iterative_adjacency_dict_dfs(graph, 0)
+
+    iterative_adjacency_dict_dfs_time = round(measure_execution_time(
         test_iterative_adjacency_dict_dfs,
         graphs_dict
-    )
-    print(f"{iterative_adjacency_dict_dfs_time = }")
+    ), 5)
+    print(f"> {iterative_adjacency_dict_dfs_time = } s")
 
+    # --------------------------------------------
+    # Time test for recursive_adjacency_dict_dfs
+    def test_recursive_adjacency_dict_dfs(graphs):
+        """ Test recursive_adjacency_dict_dfs """
+        for graph in graphs:
+            recursive_adjacency_dict_dfs(graph, 0)
+
+    recursive_adjacency_dict_dfs_time = round(measure_execution_time(
+        test_recursive_adjacency_dict_dfs,
+        graphs_dict
+    ), 5)
+    print(f"> {recursive_adjacency_dict_dfs_time = } s")
+
+    # --------------------------------------------
+    # Time test for recursive_adjacency_matrix_dfs
+    def test_recursive_adjacency_matrix_dfs(graphs):
+        """ Test recursive_adjacency_matrix_dfs """
+        for graph in graphs:
+            recursive_adjacency_matrix_dfs(graph, 0)
+
+    recursive_adjacency_matrix_dfs_time = round(measure_execution_time(
+        test_recursive_adjacency_matrix_dfs,
+        graphs_matrix
+    ), 5)
+    print(f"> {recursive_adjacency_matrix_dfs_time = } s")
+
+    # --------------------------------------------
+    # Time test for adjacency_matrix_radius
+    def test_adjacency_matrix_radius(graphs):
+        """ Test adjacency_matrix_radius """
+        for graph in graphs:
+            adjacency_matrix_radius(graph)
+
+    adjacency_matrix_radius_time = round(measure_execution_time(
+        test_adjacency_matrix_radius,
+        graphs_matrix
+    ), 5)
+    print(f"> {adjacency_matrix_radius_time = } s")
+
+    # --------------------------------------------
+    # Time test for adjacency_dict_radius
+    def test_adjacency_dict_radius(graphs):
+        """ Test adjacency_dict_radius """
+        for graph in graphs:
+            adjacency_dict_radius(graph)
+
+    adjacency_dict_radius_time = round(measure_execution_time(
+        test_adjacency_dict_radius,
+        graphs_dict
+    ), 5)
+    print(f"> {adjacency_dict_radius_time = } s")
 
 if __name__ == "__main__":
     import doctest
     doctest.testmod()
-    for i in range(10, 500, 10):
-        for j in range(10, 500, 10):
-            run_time_analyze(i, j)
-    
+    for i in range(50, 500, 50):
+        run_time_analyze(i, 10)

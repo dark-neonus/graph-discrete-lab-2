@@ -1,0 +1,126 @@
+
+
+
+
+------------------------------
+Vertice count: 50
+Loops count: 10
+
+> iterative_adjacency_dict_bfs_time = 0.00843 s
+> iterative_adjacency_dict_dfs_time = 0.00659 s
+> recursive_adjacency_dict_dfs_time = 0.0004 s
+> recursive_adjacency_matrix_dfs_time = 0.00074 s
+> adjacency_matrix_radius_time = 0.00206 s
+> adjacency_dict_radius_time = 0.01405 s
+
+
+
+
+------------------------------
+Vertice count: 100
+Loops count: 10
+
+> iterative_adjacency_dict_bfs_time = 0.06281 s
+> iterative_adjacency_dict_dfs_time = 0.04294 s
+> recursive_adjacency_dict_dfs_time = 0.00168 s
+> recursive_adjacency_matrix_dfs_time = 0.00278 s
+> adjacency_matrix_radius_time = 0.00704 s
+> adjacency_dict_radius_time = 0.0875 s
+
+
+
+
+------------------------------
+Vertice count: 150
+Loops count: 10
+
+> iterative_adjacency_dict_bfs_time = 0.2149 s
+> iterative_adjacency_dict_dfs_time = 0.13739 s
+> recursive_adjacency_dict_dfs_time = 0.00263 s
+> recursive_adjacency_matrix_dfs_time = 0.00637 s
+> adjacency_matrix_radius_time = 0.01497 s
+> adjacency_dict_radius_time = 0.27698 s
+
+
+
+
+------------------------------
+Vertice count: 200
+Loops count: 10
+
+> iterative_adjacency_dict_bfs_time = 0.54222 s
+> iterative_adjacency_dict_dfs_time = 0.30559 s
+> recursive_adjacency_dict_dfs_time = 0.0052 s
+> recursive_adjacency_matrix_dfs_time = 0.01028 s
+> adjacency_matrix_radius_time = 0.0246 s
+> adjacency_dict_radius_time = 0.60434 s
+
+
+
+
+------------------------------
+Vertice count: 250
+Loops count: 10
+
+> iterative_adjacency_dict_bfs_time = 1.10503 s
+> iterative_adjacency_dict_dfs_time = 0.58588 s
+> recursive_adjacency_dict_dfs_time = 0.00673 s
+> recursive_adjacency_matrix_dfs_time = 0.01558 s
+> adjacency_matrix_radius_time = 0.03758 s
+> adjacency_dict_radius_time = 1.17538 s
+
+
+
+
+------------------------------
+Vertice count: 300
+Loops count: 10
+
+> iterative_adjacency_dict_bfs_time = 2.1193 s
+> iterative_adjacency_dict_dfs_time = 1.02743 s
+> recursive_adjacency_dict_dfs_time = 0.01134 s
+> recursive_adjacency_matrix_dfs_time = 0.02465 s
+> adjacency_matrix_radius_time = 0.05349 s
+> adjacency_dict_radius_time = 1.9862 s
+
+
+
+
+------------------------------
+Vertice count: 350
+Loops count: 10
+
+> iterative_adjacency_dict_bfs_time = 3.70445 s
+> iterative_adjacency_dict_dfs_time = 1.59665 s
+> recursive_adjacency_dict_dfs_time = 0.01516 s
+> recursive_adjacency_matrix_dfs_time = 0.0428 s
+> adjacency_matrix_radius_time = 0.07184 s
+> adjacency_dict_radius_time = 3.14483 s
+
+
+
+
+------------------------------
+Vertice count: 400
+Loops count: 10
+
+> iterative_adjacency_dict_bfs_time = 6.06792 s
+> iterative_adjacency_dict_dfs_time = 2.39029 s
+> recursive_adjacency_dict_dfs_time = 0.03084 s
+> recursive_adjacency_matrix_dfs_time = 0.04712 s
+> adjacency_matrix_radius_time = 0.09447 s
+> adjacency_dict_radius_time = 4.71988 s
+
+
+
+
+------------------------------
+Vertice count: 450
+Loops count: 10
+
+> iterative_adjacency_dict_bfs_time = 9.63285 s
+> iterative_adjacency_dict_dfs_time = 3.3984 s
+> recursive_adjacency_dict_dfs_time = 0.05204 s
+> recursive_adjacency_matrix_dfs_time = 0.06268 s
+> adjacency_matrix_radius_time = 0.11782 s
+> adjacency_dict_radius_time = 6.64399 s
